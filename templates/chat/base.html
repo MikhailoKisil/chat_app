@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+</head>
+<body>
+<div class="container app">
+    <div class="row app-one">
+        <div class="col-sm-4 side">
+            <div class="side-one">
+                <div class="row heading">
+                    <div class="col-sm-3 col-xs-3 heading-avatar">
+                        <div class="heading-avatar-icon">
+                            <img src="{{ user.avatar.url }}">
+                        </div>
+                    </div>
+                    {#                    <div class="col-sm-1 col-xs-1 heading-dot pull-right" id="actions-dropdown">#}
+
+                        <a href="{% url 'chat:logout' %}">Вийти</a>
+
+                    {#                    </div>#}
+                    <a href="{% url 'chat:chat' %}">
+                        <div class="col-sm-2 col-xs-2 heading-compose  pull-right">
+                            <i class="fa fa-comments fa-2x  pull-right" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="row searchBox">
+                    <div class="col-sm-12 searchBox-inner">
+                        <div class="form-group has-feedback">
+                            <form action="{% url 'friend:search_friend' %}" method="get" name="search_friend"
+                                  id="searchForm">
+                                <input id="searchText" type="text" class="form-control" name="nickname" placeholder="Search" required>
+                            </form>
+                            {#                            <span class="glyphicon glyphicon-search form-control-feedback"></span>#}
+                        </div>
+                    </div>
+                </div>
+
+                <div id="rowSideBar" class="row sideBar">
+                    {% for friend in user_friends %}
+                        <a href="{% url 'chat:room' friend.username %}" class="LinkFriend">
+                            <div class="row sideBar-body">
+                                <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                                    <div class="avatar-icon">
+                                        <img src="{{ friend.avatar.url }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-9 col-xs-9 sideBar-main">
+                                    <div class="row">
+                                        <div class="col-sm-8 col-xs-8 sideBar-name">
+                                            <span class="name-meta">{{ friend.username }}</span>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
+                                            {% if friend.pk != other_user.pk %}
+                                                <span class="time-meta pull-right" id="{{ friend.username }}">{% if friend.unread_msgs %}{{ friend.unread_msgs }}{% endif %}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 conversation">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+</div>
+<div class="Data" data-username="{{ user.username }}"></div>
+{% block script %}
+{% endblock script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.2/hogan.min.js"></script>
+<script src="{% static 'js/notifications.js' %}"></script>
+<script src="{% static 'js/ajax_search.js' %}"></script>
+</body>
+</html>

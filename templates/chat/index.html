@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Simple Web Chat</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>SWC - Simple Web Chat</h1>
+    <div class="buttons">
+      <a class="button" href="{% url 'chat:login' %}">Увійти</a>
+      <a class="button" href="{% url 'chat:register' %}">Зареєструватись</a>
+    </div>
+  </div>
+</body>
+</html>

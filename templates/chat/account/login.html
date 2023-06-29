@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Simple Web Chat</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>SWC - Simple Web Chat</h1>
+    <div class="form">
+        <form action="{% url 'chat:login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {% for field in form %}
+                <div class="form-input">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}{% if field.field.required %} *{% endif %}:</label>
+                    <br>
+                    {{ field }}
+                    <div class="form-error">{{ field.errors }}</div>
+                </div>
+            {% endfor %}
+            <input class="form-button" type="submit" value="Увійти">
+{#            <button type="submit">Увійти</button>#}
+        </form>
+    </div>
+</div>
+</body>
+</html>
