@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
-from messanger.settings import MEDIA_URL
+from config.settings import MEDIA_URL
 
 User = get_user_model()
 

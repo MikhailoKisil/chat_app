@@ -1,5 +1,5 @@
 """
-ASGI config for messanger project.
+ASGI config for config project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -16,7 +16,7 @@ from django.core.asgi import get_asgi_application
 
 import chat.routing
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'messanger.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
 application = ProtocolTypeRouter(
     {

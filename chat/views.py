@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.safestring import mark_safe
 
 from chat.forms import RegisterUserForm
-from messanger import settings
+from config import settings
 
 User = get_user_model()
 
