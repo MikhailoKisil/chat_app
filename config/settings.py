@@ -81,8 +81,11 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
     }
 }
 
@@ -140,7 +143,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 AUTH_USER_MODEL = 'chat.User'
 
-REDIS_HOST = 'localhost'
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = 6379
+REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
 INTERNAL_IPS = [

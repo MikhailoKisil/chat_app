@@ -1,0 +1,32 @@
+services:
+  chat-app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/chat_app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=database
+      - DB_NAME=db
+      - DB_USER=admin
+      - DB_PASS=password
+    depends_on:
+      - database
+      - redis
+
+  database:
+    image: postgres:15.3-alpine3.18
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+
+  redis:
+    image: redis:7.0.5-alpine
+    ports:
+      - '6379:6379'
+    hostname: redis
+
