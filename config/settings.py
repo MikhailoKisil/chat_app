@@ -66,15 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = "config.asgi.application"
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
-}
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -143,11 +134,18 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 AUTH_USER_MODEL = 'chat.User'
 
-# REDIS_HOST = 'localhost'
-# REDIS_PORT = 6379
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(REDIS_HOST, REDIS_PORT)],
+        },
+    },
+}

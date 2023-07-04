@@ -15,8 +15,6 @@ User = get_user_model()
 
 redis_instance = redis.StrictRedis(host=settings.REDIS_HOST,
                                   port=settings.REDIS_PORT, db=0)
-
-
 def index(request):
     if request.user.is_authenticated:
         return redirect('chat:chat')
