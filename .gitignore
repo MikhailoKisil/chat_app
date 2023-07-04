@@ -3,7 +3,13 @@
 *.pyc
 __pycache__
 db.sqlite3
-media
+
+media/*
+!media/images/
+media/images/*
+!media/images/avatars/
+media/images/avatars/*
 !media/images/avatars/default_avatar.png
+
 .idea/
 venv/
