@@ -1,7 +1,7 @@
 # Chat App
 Simple chat app
 
-# To Run This Project Locally
+## To Run This Project Locally
 ```bash
 git clone https://github.com/MKisil/chat_app.git
 ```
