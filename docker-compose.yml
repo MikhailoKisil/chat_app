@@ -16,6 +16,8 @@ services:
     depends_on:
       - database
       - redis
+    restart:
+      always
 
   database:
     image: postgres:15.3-alpine3.18
@@ -25,10 +27,14 @@ services:
       - POSTGRES_PASSWORD=password
     ports:
       - '5432:5432'
+    restart:
+      always
 
   redis:
     image: redis:7.0.5-alpine
     ports:
       - '6379:6379'
+    restart:
+      always
 
 
